@@ -114,6 +114,8 @@ void UbpfTarget::emitUbpfHelpers(EBPF::CodeBuilder *builder) const {
         "static void *(*ubpf_packet_data)(const void *) = (void *)9;\n"
         "static void *(*ubpf_adjust_head)(const void *, uint64_t) = (void *)8;\n"
         "static uint32_t (*ubpf_truncate_packet)(const void *, uint64_t) = (void *)11;\n"
+        "static int (*getResult)()=(void *)20;\n"
+        "static void (*myPrintf)(const int) = (void *)21;\n"
         "\n");
     builder->newline();
     builder->appendLine(
