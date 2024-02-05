@@ -34,14 +34,16 @@ parser prs(packet_in p, out Headers_t headers, inout metadata meta, inout standa
     }
 }
 
-extern bool external_func();
+extern bit<8> external_func();
 
 control pipe(inout Headers_t headers, inout metadata meta, inout standard_metadata std_meta) {
     apply {
-        if (headers.icmp.type_ == ICMP_ECHO_REQUEST_TYPE) {
-	    if (external_func()) {
-	        mark_to_drop();
-	    }
+        if (headers.ipv4.protocol == IP_PROTO_ICMP){
+            if (headers.icmp.type_ == ICMP_ECHO_REQUEST_TYPE) {
+                if (external_func()==0) {
+                    mark_to_drop();
+                }
+            }
         }
     }
 }
