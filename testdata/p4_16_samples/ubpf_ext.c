@@ -1,14 +1,6 @@
-//#include <stdbool.h>
 #include "ubpf.h"
 #include "ubpf_ext.h"
-/*
-bool external_func(){
-	if(getResult()==1)
-		return true;
-	return false;
-}
-*/
 
-int external_func(){
-	return getResult();
+uint64_t get_vm_info(){
+	return read_vm_info();
 }

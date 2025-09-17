@@ -1,1 +1,1 @@
-extern int external_func();
+extern uint64_t get_vm_info();
