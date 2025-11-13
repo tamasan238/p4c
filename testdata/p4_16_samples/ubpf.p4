@@ -44,20 +44,20 @@ control pipe(inout Headers_t headers, inout metadata meta, inout standard_metada
     bit<64> vm_info; // (unsigned long threshld, used_bytes)
 
     apply {
-        vm_info = get_vm_info();
-        if (vm_info[63:32] < vm_info[31:0]) { // threshold < used_bytes
-            mark_to_drop();
-        }
-        //if (headers.ipv4.protocol == IP_PROTO_TCP){
-        //    if ((headers.tcp.flags & 0x10) == 0) { // ack is false
-        //        if ((headers.tcp.flags & 0x02) != 0) { // syn is true
-        //            vm_info = get_vm_info();
-        //            if (vm_info[63:32] < vm_info[31:0]) { // threshold < used_bytes
-        //                mark_to_drop();
-        //            }
-        //        }
-        //    }
+        //vm_info = get_vm_info();
+        //if (vm_info[63:32] < vm_info[31:0]) { // threshold < used_bytes
+        //    mark_to_drop();
         //}
+        if (headers.ipv4.protocol == IP_PROTO_TCP){
+            if ((headers.tcp.flags & 0x10) == 0) { // ack is false
+                if ((headers.tcp.flags & 0x02) != 0) { // syn is true
+                    vm_info = get_vm_info();
+                    if (vm_info[63:32] < vm_info[31:0]) { // threshold < used_bytes
+                        mark_to_drop();
+                    }
+                }
+            }
+        }
     }
 }
 
