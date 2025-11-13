@@ -45,3 +45,7 @@ bazel-*
 
 # JetBrains
 .idea/
+
+testdata/p4_16_samples/ubpf.c
+testdata/p4_16_samples/ubpf.h
+testdata/p4_16_samples/ubpf.o
